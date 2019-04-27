@@ -29,6 +29,10 @@ def serread(ser, nbytes):
 
 if __name__ == '__main__':
     devname = sys.argv[1]
+    if len(sys.argv) > 2:
+        secswait = float(sys.argv[2])
+    else:
+        secswait = 10
 
     sys.stderr.write("opening device: " + devname + "\n")
     ser = serial.Serial()
@@ -38,7 +42,7 @@ if __name__ == '__main__':
     ser.bytesize = serial.EIGHTBITS
     ser.rtscts = False
     ser.xonxoff = False
-    ser.timeout = 10
+    ser.timeout = secswait 
     ser.open()
     sys.stderr.write("open\n")
     while True:
